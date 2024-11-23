@@ -28,4 +28,20 @@ module.exports = {
 			);
 		});
 	},
+
+	deleteChecklist: (id) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				'DELETE FROM checklists WHERE id = ($1)',
+				[id],
+				(error, result) => {
+					if (!error) {
+						resolve(result);
+					} else {
+						reject(error);
+					}
+				}
+			);
+		});
+	},
 };

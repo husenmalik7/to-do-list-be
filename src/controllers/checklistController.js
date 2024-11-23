@@ -39,4 +39,17 @@ module.exports = {
 				console.log(error);
 			});
 	},
+
+	deleteChecklist: (req, res) => {
+		const id = req.params.id;
+
+		model
+			.deleteChecklist(id)
+			.then(() => {
+				form.success(res, id);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	},
 };
