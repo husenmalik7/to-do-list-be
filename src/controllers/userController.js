@@ -36,11 +36,11 @@ module.exports = {
 		model
 			.checkIsUserRegistered(body.username)
 			.then((response) => {
-				if (response.length === 0) {
+				if (response.rows.length === 0) {
 					res.json({ message: 'username tidak ditemukan' });
 				} else {
-					const username = response[0].username;
-					const password = response[0].password;
+					const username = response.rows[0].username;
+					const password = response.rows[0].password;
 
 					const isPasswordTrue = body.password.localeCompare(password);
 
