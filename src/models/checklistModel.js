@@ -12,4 +12,20 @@ module.exports = {
 			});
 		});
 	},
+
+	postChecklist: (body) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				'INSERT INTO checklists (name, checklistCompletionStatus) VALUES ($1, false)',
+				[body.name],
+				(error, result) => {
+					if (!error) {
+						resolve(result);
+					} else {
+						reject(error);
+					}
+				}
+			);
+		});
+	},
 };

@@ -25,4 +25,18 @@ module.exports = {
 				console.log(error);
 			});
 	},
+
+	postChecklist: (req, res) => {
+		const { name } = req.body;
+		const body = { name };
+
+		model
+			.postChecklist(body)
+			.then((response) => {
+				form.success(res, body);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	},
 };
