@@ -1,21 +1,19 @@
-require('dotenv/config');
+const express = require("express");
+const bodyParser = require("body-parser");
 
-const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
-const port = 3003;
-const cors = require('cors');
-const router = require('./src/routes/index');
+const port = process.env.PORT || 3003;
+const cors = require("cors");
 
-app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/', router);
+app.use(cors());
 
-app.get('/', (req, res) => {
-	res.send(`Hello World!`);
-});
+const routes = require("./src/routes/index");
+app.use("/", routes);
 
 app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`);
+  console.log("your server started on " + port);
 });
+
+module.exports = app;
