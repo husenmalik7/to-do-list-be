@@ -62,22 +62,4 @@ module.exports = {
 				console.log(error);
 			});
 	},
-
-	getUserById: (req, res) => {
-		const id = req.params.id;
-
-		model
-			.getUserById(id)
-			.then((response) => {
-				if (response.length) {
-					res.status(200).json({ status: 200, response });
-				} else {
-					res.status(400).json({ status: 400, message: 'error fetch data' });
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-				res.status(400).json({ status: 400, message: 'error fetch data' });
-			});
-	},
 };
