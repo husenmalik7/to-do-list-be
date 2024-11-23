@@ -10,7 +10,7 @@ module.exports = {
 		model
 			.checkIsUserRegistered(body.username)
 			.then((response) => {
-				if (response.length === 0) {
+				if (response.rows.length === 0) {
 					model
 						.registerUser(body)
 						.then(() => {
@@ -50,7 +50,7 @@ module.exports = {
 							process.env.JWT_PRIVATE_KEY,
 							{ expiresIn: '24h' },
 							(_, token) => {
-								form.success(res, {token});
+								form.success(res, { token });
 							}
 						);
 					} else {
