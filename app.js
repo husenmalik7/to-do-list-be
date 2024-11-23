@@ -3,7 +3,7 @@ require('dotenv/config');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 42848;
+const port = 3003;
 const cors = require('cors');
 const router = require('./src/routes/index');
 
