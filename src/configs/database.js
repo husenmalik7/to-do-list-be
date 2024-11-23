@@ -1,12 +1,20 @@
-const mysql = require('mysql');
+const Pool = require('pg').Pool;
 
-var db = mysql.createConnection({
-	host: process.env.DB_HOST,
-	user: process.env.DB_USER,
-	password: process.env.DB_PASSWORD,
-	database: process.env.DB_NAME,
+const pool = new Pool({
+	user: 'postgres',
+	host: 'autorack.proxy.rlwy.net',
+	database: 'railway',
+	password: 'JdLNwjCAnssYyOnJfcuMzOVUtTstVDrJ',
+	port: 42848,
+	// ssl: true,
+
+	ssl: {
+		rejectUnauthorized: false,
+	},
 });
 
-db.connect();
+pool.connect((error) => {
+	if (error) throw error;
+});
 
-module.exports = db;
+module.exports = pool;

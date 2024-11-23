@@ -4,7 +4,7 @@ module.exports = {
 	registerUser: function (body) {
 		return new Promise(function (resolve, reject) {
 			db.query(
-				'insert into users set username=?, password=?, email=?',
+				"INSERT INTO users (username, password, email) VALUES ($1, $2, $3)",
 				[body.username, body.password, body.email],
 				function (error) {
 					if (!error) {
@@ -20,7 +20,7 @@ module.exports = {
 	checkIsUserRegistered: (username) => {
 		return new Promise((resolve, reject) => {
 			db.query(
-				'select * from users where username = ?',
+				"SELECT * FROM users WHERE username = ($1)",
 				[username],
 				function (error, result) {
 					if (!error) {
