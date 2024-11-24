@@ -1,6 +1,22 @@
 const db = require('../configs/database');
 
 module.exports = {
+	deleteItem: (body) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				'DELETE FROM items WHERE  checklist_id = ($1) and id = ($2)',
+				[body.checklistId, body.itemId],
+				(error, result) => {
+					if (!error) {
+						resolve(result);
+					} else {
+						reject(error);
+					}
+				}
+			);
+		});
+	},
+
 	getItemById: (body) => {
 		return new Promise((resolve, reject) => {
 			db.query(

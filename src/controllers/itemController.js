@@ -2,6 +2,21 @@ const model = require('../models/itemModel');
 const form = require('../helper/form');
 
 module.exports = {
+	deleteItem: (req, res) => {
+		const checklistId = req.params.checklistId;
+		const itemId = req.params.itemId;
+		const body = { checklistId, itemId };
+
+		model
+			.deleteItem(body)
+			.then(() => {
+				form.success(res, body);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	},
+
 	getItemById: (req, res) => {
 		const checklistId = req.params.checklistId;
 		const itemId = req.params.itemId;
