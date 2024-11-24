@@ -1,6 +1,22 @@
 const db = require('../configs/database');
 
 module.exports = {
+	getItemById: (body) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				'SELECT * FROM items WHERE checklist_id = ($1) and id = ($2)',
+				[body.checklistId, body.itemId],
+				(error, result) => {
+					if (!error) {
+						resolve(result);
+					} else {
+						reject(error);
+					}
+				}
+			);
+		});
+	},
+
 	getAllItem: (checklistId) => {
 		return new Promise((resolve, reject) => {
 			db.query(
