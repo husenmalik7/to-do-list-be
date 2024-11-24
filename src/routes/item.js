@@ -11,5 +11,6 @@ Router.get('/checklist/:checklistId/item/:itemId', auth.checkToken, controller.g
 Router.delete('/checklist/:checklistId/item/:itemId', auth.checkToken, controller.deleteItem);
 
 Router.put('/checklist/:checklistId/item/:itemId', auth.checkToken, controller.changeItemStatus);
+Router.put('/checklist/:checklistId/item/rename/:itemId', auth.checkToken, controller.changeItemName);
 
 module.exports = Router;
