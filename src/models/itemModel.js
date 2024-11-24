@@ -1,6 +1,22 @@
 const db = require('../configs/database');
 
 module.exports = {
+	changeItemStatus: (itemId) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				'UPDATE items SET item_completion_status = NOT item_completion_status WHERE id = ($1)',
+				[itemId],
+				(error, result) => {
+					if (!error) {
+						resolve(result);
+					} else {
+						reject(error);
+					}
+				}
+			);
+		});
+	},
+
 	deleteItem: (body) => {
 		return new Promise((resolve, reject) => {
 			db.query(

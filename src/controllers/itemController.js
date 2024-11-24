@@ -2,6 +2,33 @@ const model = require('../models/itemModel');
 const form = require('../helper/form');
 
 module.exports = {
+	changeItemStatus: (req, res) => {
+		const checklistId = req.params.checklistId;
+		const itemId = req.params.itemId;
+		const body = { checklistId, itemId };
+
+		model
+			.getItemById(body)
+			.then((response) => {
+				if (response.rows.length !== 0) {
+					model
+						.changeItemStatus(itemId)
+						.then(() => {
+							form.success(res, body);
+						})
+						.catch((error) => {
+							form.failed(res, error);
+							console.log(error);
+						});
+				} else {
+					form.violate(res, 'data tidak ditemukan');
+				}
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	},
+
 	deleteItem: (req, res) => {
 		const checklistId = req.params.checklistId;
 		const itemId = req.params.itemId;
